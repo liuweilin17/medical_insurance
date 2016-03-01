@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping 
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-5.0.dtd"> 
+
+<hibernate-mapping>  
+   <class name="com.medical.entity.Application"  table="application">  
+      <id name="ap_id" type="int" column="ap_id">
+      	
+      </id>  
+      <!-- 设置主键不能重复和不能为空的属性. -->  
+      <property name="u_id" column="u_id"/>  
+      <property name="c_id" column="c_id"/>  
+      <property name="con_id" column="con_id"/>
+      <property name="status" column="status"/> 
+   </class>  
+</hibernate-mapping>  
+
+

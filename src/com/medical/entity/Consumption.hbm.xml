@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping 
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-5.0.dtd"> 
+
+<hibernate-mapping>  
+   <class name="com.medical.entity.Consumption"  table="consumption">  
+      <id name="con_id" type="int" column="con_id">
+      	
+      </id>  
+      <!-- 设置主键不能重复和不能为空的属性. -->  
+      <property name="h_id" column="h_id"/>  
+      <property name="u_id" column="u_id"/>  
+      <property name="begin" column="begin"/>
+      <property name="end" column="end"/> 
+      <property name="disease" column="disease"/>
+      <property name="expense" column="expense"/> 
+   </class>  
+</hibernate-mapping>  
+
+

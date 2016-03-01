@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping 
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-5.0.dtd"> 
+
+<hibernate-mapping>  
+   <class name="com.medical.entity.User"  table="user">  
+      <id name="u_id" type="int" column="u_id">
+      	
+      </id>  
+      <!-- 设置主键不能重复和不能为空的属性. -->  
+      <property name="u_name" column="u_name"/>  
+      <property name="u_password" column="u_password"/>  
+      <property name="u_age" column="u_age"/> 
+   </class>  
+</hibernate-mapping>  
+
+
