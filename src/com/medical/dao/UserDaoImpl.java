@@ -46,13 +46,19 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void modifyUser(User user) {
 		// TODO Auto-generated method stub
-		
+		getHibernateTemplate().update(user);
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public List<User> findFlag0() {
+		// TODO Auto-generated method stub
+		System.out.println("UserDaoImpl:find a user");
+		return (List<User>)getHibernateTemplate().find("from User where flag = 0");
 	}
 
 	

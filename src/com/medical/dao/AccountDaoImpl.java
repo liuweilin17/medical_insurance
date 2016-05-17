@@ -52,5 +52,15 @@ public class AccountDaoImpl implements AccountDao {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public List<Account> findByUid(int id) {
+		// TODO Auto-generated method stub
+		return (List<Account>)getHibernateTemplate().find("from Account where u_id = ?", id);
+	}
+	@Override
+	public List<Account> findByCid(int id) {
+		// TODO Auto-generated method stub
+		return (List<Account>)getHibernateTemplate().find("from Account where c_id = ?", id);
+	}
 
 }

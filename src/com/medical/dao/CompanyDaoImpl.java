@@ -54,5 +54,10 @@ public class CompanyDaoImpl implements CompanyDao {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public List<Company> findAll() {
+		// TODO Auto-generated method stub
+		return (List<Company>)getHibernateTemplate().find("from Company");
+	}
 
 }

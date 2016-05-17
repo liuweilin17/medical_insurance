@@ -6,7 +6,7 @@ PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN"
 <hibernate-mapping>  
    <class name="com.medical.entity.Account"  table="account">  
       <id name="a_id" type="int" column="a_id">
-      	
+      	<generator class="increment" />
       </id>  
       <!-- 设置主键不能重复和不能为空的属性. -->  
       <property name="c_id" column="c_id"/>  

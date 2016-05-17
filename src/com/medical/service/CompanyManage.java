@@ -6,6 +6,7 @@ import com.medical.entity.Company;
 
 	public interface CompanyManage {
 	public List<Company> findById(int id);
+	public List<Company> findAll();
 	public void addCompany(Company com);
 	public void modifyCompany(Company com);
 	public void deleteCompany(Company com);

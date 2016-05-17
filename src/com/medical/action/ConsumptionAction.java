@@ -1,10 +1,10 @@
 package com.medical.action;
+import java.io.PrintWriter;
+import com.medical.redis.Md5Util;
+import com.medical.redis.RedisClient;
 
-import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -14,19 +14,18 @@ import com.medical.service.ConsumptionManage;
 import com.medical.service.UserManage;
 import com.opensymphony.xwork2.ActionSupport;
 
-import net.sf.json.JSONObject;
 
+import net.sf.json.JSONObject;
 public class ConsumptionAction extends ActionSupport{
 	private String flag;
+	private String con_id;
 	private String h_id;
 	private String u_id;
 	private String begin;
 	private String end;
 	private String disease;
 	private String expense;
-	//private String tip;
 	private String result;
-	private InputStream inputStream;
 	private ConsumptionManage consumptionService;
 	private UserManage userService;
 	
@@ -52,6 +51,14 @@ public class ConsumptionAction extends ActionSupport{
 	public void setU_id(String u_id) {
 		this.u_id = u_id;
 	}
+	public String getCon_id() {
+		return con_id;
+	}
+
+	public void setCon_id(String con_id) {
+		this.con_id = con_id;
+	}
+
 	public String getBegin() {
 		return begin;
 	}
@@ -142,6 +149,7 @@ public class ConsumptionAction extends ActionSupport{
 		List<User> userList = userService.findById(Integer.parseInt(u_id));
 		if(userList.size() == 0){
 			result="用户编号不存在！";
+			return SUCCESS;
 		}
 		Consumption con = new Consumption();
 		con.setH_id(Integer.parseInt(h_id));
@@ -151,6 +159,8 @@ public class ConsumptionAction extends ActionSupport{
 		con.setDisease(disease);
 		con.setExpense(expense);
 		consumptionService.addConsumption(con);
+		RedisClient rc = new RedisClient();
+		rc.clear();
 		result = "消费记录已插入！";
 		
 		return SUCCESS;
@@ -161,27 +171,106 @@ public class ConsumptionAction extends ActionSupport{
 		System.out.println("flag:"+flag);
 		System.out.println("h_id:"+h_id);
 		if(flag.equals("0")){
+			
+			String sql = "consumption:h_id:"+h_id;
+			String sqlMd5 = Md5Util.getMd5(sql);
+			RedisClient rc = new RedisClient();
+			String value = rc.getValue(sqlMd5);
+			if(value!=null){
+				ServletActionContext.getResponse().setContentType("text/html;charset=utf-8"); 
+				PrintWriter out = ServletActionContext.getResponse().getWriter(); 
+				out.print(value); 
+				out.flush(); 
+				out.close(); 
+				return null;
+			}
+			
 			List<Consumption> consumptionList = consumptionService.findByHid(Integer.parseInt(h_id));
 			JSONObject obj = new JSONObject();
 			obj.put("aaData", consumptionList);
-			setInputStream(new StringBufferInputStream(obj.toString()));
-			return SUCCESS;
+			//System.out.println(obj.toString());
+			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8"); 
+			PrintWriter out = ServletActionContext.getResponse().getWriter(); 
+			rc.setValue(sqlMd5, obj.toString());
+			out.print(obj.toString()); 
+			out.flush(); 
+			out.close(); 
+			return null;
 		}else if(flag.equals("1")){
-			
+			String sql = "consumption:u_id:"+u_id;
+			String sqlMd5 = Md5Util.getMd5(sql);
+			RedisClient rc = new RedisClient();
+			String value = rc.getValue(sqlMd5);
+			if(value!=null){
+				ServletActionContext.getResponse().setContentType("text/html;charset=utf-8"); 
+				PrintWriter out = ServletActionContext.getResponse().getWriter(); 
+				out.print(value); 
+				out.flush(); 
+				out.close(); 
+				return null;
+			}
+			List<Consumption> consumptionList = consumptionService.findByUid(Integer.parseInt(u_id));
+			JSONObject obj = new JSONObject();
+			obj.put("aaData", consumptionList);
+			System.out.println(obj.toString());
+			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8"); 
+			PrintWriter out = ServletActionContext.getResponse().getWriter(); 
+			rc.setValue(sqlMd5, obj.toString());
+			out.print(obj.toString()); 
+			out.flush(); 
+			out.close(); 
+			return null;
+		}else if(flag.equals("2")){
+			Consumption consumption = consumptionService.findById(Integer.parseInt(con_id)).get(0);
+			JSONObject obj = new JSONObject();
+			obj.put("consumption", consumption);
+			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8"); 
+			PrintWriter out = ServletActionContext.getResponse().getWriter(); 
+			out.print(obj.toString()); 
+			out.flush(); 
+			out.close(); 
+			return null;
 		}else{
 			
 		}
 		return SUCCESS;
 	}
-
-	public InputStream getInputStream() {
-		return inputStream;
+	public String modifyConsumption() throws Exception{
+		if(begin == null||begin.equals("")){
+			result="起始日期不能为空！";
+			System.out.println(2);
+			return SUCCESS;
+			
+		}
+		if(end == null||end.equals("")){
+			result="结束日期不能为空！";
+			System.out.println(3);
+			return SUCCESS;
+			
+		}
+		if(disease == null||disease.equals("")){
+			System.out.println(4);
+			result="疾病不能为空！";
+			return SUCCESS;
+			
+		}
+		if(expense == null||expense.equals("")){
+			System.out.println(5);
+			result="花费不能为空！";
+			return SUCCESS;
+		}
+		Consumption con = consumptionService.findById(Integer.parseInt(con_id)).get(0);
+		con.setBegin(begin);
+		con.setEnd(end);
+		con.setDisease(disease);
+		System.out.println("ConsumptionAction:"+con.getDisease());
+		con.setExpense(expense);
+		consumptionService.modifyConsumption(con);
+		RedisClient rc = new RedisClient();
+		rc.clear();
+		result = "更新成功";
+		return SUCCESS;
 	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-
 
 
 

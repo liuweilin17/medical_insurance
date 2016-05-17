@@ -105,6 +105,8 @@ public class LoginAction extends ActionSupport{
 			 int len = userList.size();
 			 for(int i=0;i<len;i++){
 				if (userList.get(i).getU_password().equals(password)){
+					User user = userList.get(i);
+					request.getSession().setAttribute("user", user);
 					return "people";
 				}
 			 }
@@ -115,6 +117,8 @@ public class LoginAction extends ActionSupport{
 			 int len = companyList.size();
 			 for(int i=0;i<len;i++){
 				if (companyList.get(i).getC_password().equals(password)){
+					Company com = companyList.get(i);
+					request.getSession().setAttribute("company", com);
 					return "company";
 				}
 			 }

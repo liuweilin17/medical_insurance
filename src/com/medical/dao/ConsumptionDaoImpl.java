@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import com.medical.entity.Consumption;
 import com.medical.entity.User;
+import com.medical.redis.Md5Util;
 
 public class ConsumptionDaoImpl implements ConsumptionDao {
 	private HibernateTemplate ht = null;
@@ -39,7 +40,7 @@ public class ConsumptionDaoImpl implements ConsumptionDao {
 	@Override
 	public List<Consumption> findByUid(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Consumption>)getHibernateTemplate().find("from Consumption where u_id = ?", id);
 	}
 
 	@Override
@@ -49,15 +50,20 @@ public class ConsumptionDaoImpl implements ConsumptionDao {
 	}
 
 	@Override
-	public void modifyUser(Consumption con) {
+	public void modifyConsumption(Consumption con) {
 		// TODO Auto-generated method stub
-
+		getHibernateTemplate().update(con);
 	}
 
 	@Override
-	public void deleteUser(Consumption con) {
+	public void deleteConsumption(Consumption con) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public List<Consumption> findById(int id) {
+		// TODO Auto-generated method stub
+		return (List<Consumption>)getHibernateTemplate().find("from Consumption where con_id = ?",id);
 	}
 
 }

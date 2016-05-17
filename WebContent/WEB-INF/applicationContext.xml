@@ -16,7 +16,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/medical_insurance" />
+		<property name="url" value="jdbc:mysql://localhost/medical_insurance?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
@@ -42,6 +42,10 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- jedis -->
+	
+	<!-- jedis end -->
 	
 	<!-- Spring管理Action实例 -->
 	<bean id="userDao" class="com.medical.dao.UserDaoImpl">
@@ -95,7 +99,21 @@
 		<property name="userService" ref="userManage"></property>
    		<property name="consumptionService" ref="consumptionManage"></property>
 	</bean>
-	
+	<bean id="AccountAction" class="com.medical.action.AccountAction" scope="prototype">
+		<property name="accountService" ref="accountManage"></property>
+		<property name="companyService" ref="companyManage"></property>
+		<property name="UserService" ref="userManage"></property>
+	</bean>
+	<bean id="ApplicationAction" class="com.medical.action.ApplicationAction" scope="prototype">
+		<property name="applicationService" ref="applicationManage"></property>
+		<property name="userService" ref="userManage"></property>
+		<property name="hospitalService" ref="hospitalManage"></property>
+		<property name="companyService" ref="companyManage"></property>
+		<property name="consumptionService" ref="consumptionManage"></property>
+	</bean>
+	<bean id="UserAction" class="com.medical.action.UserAction" scope="prototype">
+		<property name="userService" ref="userManage"></property>
+	</bean>
 	
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"

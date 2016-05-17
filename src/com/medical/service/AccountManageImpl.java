@@ -5,7 +5,7 @@ import java.util.List;
 import com.medical.dao.AccountDao;
 import com.medical.entity.Account;
 
-public class AccountManageImpl implements AccountDao {
+public class AccountManageImpl implements AccountManage {
 	private AccountDao accountDao;
 
 	public AccountDao getAccountDao() {
@@ -23,9 +23,9 @@ public class AccountManageImpl implements AccountDao {
 	}
 
 	@Override
-	public Integer addAccount(Account ac) {
+	public void addAccount(Account ac) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
@@ -38,6 +38,18 @@ public class AccountManageImpl implements AccountDao {
 	public void deleteAccount(Account ac) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<Account> findByUid(int id) {
+		// TODO Auto-generated method stub
+		return accountDao.findByUid(id);
+	}
+
+	@Override
+	public List<Account> findByCid(int id) {
+		// TODO Auto-generated method stub
+		return accountDao.findByCid(id);
 	}
 
 

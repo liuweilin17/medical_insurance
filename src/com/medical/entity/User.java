@@ -11,6 +11,7 @@ public class User {
 	private String u_name;
 	private String u_password;
 	private int u_age;
+	private int flag;
 	
 	public int getU_id() {
 		return u_id;
@@ -42,6 +43,14 @@ public class User {
 
 	public void setU_age(int u_age) {
 		this.u_age = u_age;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 }
 

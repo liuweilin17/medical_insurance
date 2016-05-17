@@ -30,27 +30,42 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	}
 
 	@Override
-	public List<Application> findById(int id) {
+	public List<Application> findByUid(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Application>)getHibernateTemplate().find("from Application where u_id = ?", id);
 	}
 
 	@Override
 	public Integer addApplication(Application ap) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Integer)getHibernateTemplate().save(ap);
 	}
 
 	@Override
 	public void modifyApplication(Application ap) {
 		// TODO Auto-generated method stub
-
+		getHibernateTemplate().update(ap);
 	}
 
 	@Override
 	public void deleteApplication(Application ap) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public List<Application> findByConidCid(int con_id, int c_id) {
+		// TODO Auto-generated method stub
+		return (List<Application>) getHibernateTemplate().find("from Application where con_id = ? and c_id = ?", con_id, c_id);
+	}
+	@Override
+	public List<Application> findById(int id) {
+		// TODO Auto-generated method stub
+		return (List<Application>) getHibernateTemplate().find("from Application where ap_id = ?", id);
+	}
+	@Override
+	public List<Application> findByCid(int id) {
+		// TODO Auto-generated method stub
+		return (List<Application>) getHibernateTemplate().find("from Application where c_id = ?", id);
 	}
 
 }

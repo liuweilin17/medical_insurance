@@ -41,4 +41,10 @@ public class CompanyManageImpl implements CompanyManage {
 		companyDao.deleteCompany(com);
 	}
 
+	@Override
+	public List<Company> findAll() {
+		// TODO Auto-generated method stub
+		return companyDao.findAll();
+	}
+
 }

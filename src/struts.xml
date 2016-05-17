@@ -21,9 +21,44 @@
 			<result type="json"></result>
 		</action>
 		<action name="findConsumption" class="ConsumptionAction" method="findConsumption">
-			<result type="stream">
-				<param name="contentType">text/html</param>
-     			<param name="inputName">inputStream</param>
+ 			<result type="plainText"> 
+      			<param name="charSet">UTF-8</param>	
+    		</result>        
+		</action>
+		<action name="modifyConsumption" class="ConsumptionAction" method="modifyConsumption">
+			<result type="json">
+				<param name="charSet">UTF-8</param>
+			</result>
+		</action>
+		<action name="findAccount" class="AccountAction" method="findAccount">
+			 <result type="plainText"> 
+      			<param name="charSet">UTF-8</param>	
+    		</result>
+		</action>
+		<action name="addApplication" class="ApplicationAction" method="addApplication">
+			<result type="json"></result>
+		</action>
+		<action name="findApplication" class="ApplicationAction" method="findApplication">
+ 			<result type="plainText"> 
+      			<param name="charSet">UTF-8</param>	
+    		</result>        
+		</action>
+		<action name="findApplicationDetail" class="ApplicationAction" method="findApplicationDetail">
+ 			<result type="plainText"> 
+      			<param name="charSet">UTF-8</param>	
+    		</result>        
+		</action>
+		<action name="modifyApplication" class="ApplicationAction" method="modifyApplication">
+ 			<result type="json"> </result>        
+		</action>
+		<action name="findUser" class="UserAction" method="findUser">
+			<result type="plainText">
+				<param name="charSet">UTF-8</param>
+			</result>
+		</action>
+		<action name="modifyUser" class="UserAction" method="modifyUser">
+			<result type="json"> 
+				<param name="excludeProperties">userService</param> 
 			</result>
 		</action>
 	</package>

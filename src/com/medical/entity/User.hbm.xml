@@ -11,7 +11,8 @@ PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.0//EN"
       <!-- 设置主键不能重复和不能为空的属性. -->  
       <property name="u_name" column="u_name"/>  
       <property name="u_password" column="u_password"/>  
-      <property name="u_age" column="u_age"/> 
+      <property name="u_age" column="u_age"/>
+      <property name="flag" column="flag"/> 
    </class>  
 </hibernate-mapping>  
 

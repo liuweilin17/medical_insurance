@@ -24,6 +24,12 @@ public class ConsumptionManageImpl implements ConsumptionManage {
 	}
 
 	@Override
+	public List<Consumption> findByUid(int id) {
+		// TODO Auto-generated method stub
+		return consumptionDao.findByUid(id);
+	}
+	
+	@Override
 	public void addConsumption(Consumption con) {
 		// TODO Auto-generated method stub
 		consumptionDao.addConsumption(con);
@@ -32,7 +38,8 @@ public class ConsumptionManageImpl implements ConsumptionManage {
 	@Override
 	public void modifyConsumption(Consumption con) {
 		// TODO Auto-generated method stub
-
+		System.out.println("modifyConsumption:"+con.getDisease());
+		consumptionDao.modifyConsumption(con);
 	}
 
 	@Override
@@ -41,5 +48,10 @@ public class ConsumptionManageImpl implements ConsumptionManage {
 
 	}
 
+	@Override
+	public List<Consumption> findById(int id) {
+		// TODO Auto-generated method stub
+		return consumptionDao.findById(id);
+	}
 
 }

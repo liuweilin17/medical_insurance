@@ -43,4 +43,10 @@ public class UserManageImpl implements UserManage {
 		userDao.deleteUser(user);
 	}
 
+	@Override
+	public List<User> findFlag0() {
+		// TODO Auto-generated method stub
+		return userDao.findFlag0();
+	}
+
 }

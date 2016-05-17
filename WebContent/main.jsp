@@ -24,9 +24,12 @@
 	
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.js"></script>
+<%-- 	<script src="js/jquery.js"></script> --%>
 	<script src="js/jquery.dataTables.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/locales/bootstrap-datetimepicker.fr.js"></script>
+	
+	<script src="js/jquery.jqprint-0.3.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 </body>
 </html>
